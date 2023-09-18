@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "menu.h"
-// #include "text_analyzer.h"
+#include "board.h"
 #include "console_input.h"
 #include "file_input.h"
 #include "random_input.h"
@@ -45,11 +45,13 @@ void interface_menu() {
 		}
 			break;
 		case FILES: {
-			input = std::make_unique<FileInput>();
+			std::cout << "No test yet! Sorry! :(";
+			// input = std::make_unique<FileInput>();
 		}
 			break;
 		case RANDOM: {
-			input = std::make_unique<RandomInput>();
+			std::cout << "No test yet! Sorry! :(";
+			// input = std::make_unique<RandomInput>();
 		}
 			break;
 		case TEST: {
@@ -59,6 +61,23 @@ void interface_menu() {
 		default:
 			break;
 		}
+
+		std::unique_ptr<Board> board(new Board);
+		const bool is_success = input->read(*board);
+		const bool is_file_input = input->get_is_file_input();
+
+		if (is_success) {
+			std::cout << std::endl << "Data read successfully!" << std::endl;
+		} else {
+			continue;
+		}
+
+		/*if (!is_file_input) {
+			fo.save_input_data(*text);
+		}*/
+
+		board->print_board();
+		board->print_neighbours();
 
 	} while (is_restart);
 }

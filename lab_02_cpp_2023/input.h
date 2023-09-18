@@ -1,7 +1,7 @@
 #ifndef _INPUT_H_
 #define _INPUT_H_
 
-// #include "text_analyzer.h"
+#include "board.h"
 
 // Абстрактный класс реализующий чтение массива
 class Input {
@@ -11,9 +11,11 @@ public:
 	// Контракт метода:
 	// 1 - Записать в поле @text - текст
 	// 2 - Вернуть успешно или нет
-	// virtual bool read(Text& text) = 0;
+	virtual bool read(Board& board) = 0;
 
 	[[nodiscard]] bool get_is_file_input() const;
+
+	bool check_string(std::string str);
 
 	// Виртуальный деструктор
 	virtual ~Input() = default;

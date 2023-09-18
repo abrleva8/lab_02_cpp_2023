@@ -11,7 +11,7 @@ protected:
 public:
 	ConsoleInput();
 	// Реализация метода из класса @Input
-	//bool read(Text& text) override;
+	bool read(Board& board) override;
 
 	// Спрашивает у пользователя "да" или "нет"
 	// Если введено 'y' -  возвращает @true
