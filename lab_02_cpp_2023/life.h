@@ -12,6 +12,10 @@ private:
 	Board board;
 protected:
 public:
+	Simulator(Board board);
+	void print_board();
+	void print_neighbours();
+	void next_generation();
 };
 
 

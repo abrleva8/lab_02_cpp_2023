@@ -5,6 +5,7 @@
 #include "console_input.h"
 #include "file_input.h"
 #include "random_input.h"
+#include "life.h"
 // #include "file_output.h"
 // #include "test.h"
 
@@ -75,9 +76,16 @@ void interface_menu() {
 		/*if (!is_file_input) {
 			fo.save_input_data(*text);
 		}*/
-
-		board->print_board();
-		board->print_neighbours();
+		
+		// std::unique_ptr<Simulator> simulator(new Simulator(board));
+		const auto simulator = std::make_unique<Simulator>(*board);
+		simulator->print_board();
+		simulator->print_neighbours();
+		for (int i = 0; i < 5; i++) {
+			simulator->next_generation();
+			simulator->print_board();
+			simulator->print_neighbours();
+		}
 
 	} while (is_restart);
 }

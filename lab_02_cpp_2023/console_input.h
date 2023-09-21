@@ -26,7 +26,7 @@ public:
 	// Ўаблонный метод который возвращает число c промежутка [@min; @max]
 	// –аботает с базовыми типами данных
 	template<class Type>
-	Type get_number(Type min, Type max);
+	Type get_number(Type min, Type max, std::string message="");
 };
 
 template<typename Type>
@@ -47,11 +47,14 @@ Type ConsoleInput::get_number() {
 }
 
 template<typename Type>
-Type ConsoleInput::get_number(Type min, Type max) {
+Type ConsoleInput::get_number(Type min, Type max, std::string message) {
 	Type result = get_number<Type>();
 	while (result > max || result < min) {
 		std::cout << "Your number should be between " << min << " and " << max << std::endl;
 		std::cout << "Try again, please!" << std::endl;
+		if (!message.empty()) {
+			std::cout << message;
+		}
 		result = get_number<Type>();
 	}
 	return result;

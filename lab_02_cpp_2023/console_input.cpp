@@ -14,9 +14,10 @@ bool ConsoleInput::read(Board& board) {
 	board = Board(size);
 
 	for (int i = 0; i < size; i++) {
-		std::cout << i + 1 << " row: ";
 		for (int j = 0; j < size; j++) {
-			int number = get_number(0, 1);
+			std::string message = "board[" + std::to_string(i + 1) + "][" + std::to_string(j + 1) + "]: ";
+			std::cout << message;
+			int number = get_number(0, 1, message);
 			board.cells[i][j] = static_cast<CELLTYPE>(number);
 		}
 	}

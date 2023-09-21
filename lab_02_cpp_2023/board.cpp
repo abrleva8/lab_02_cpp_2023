@@ -60,6 +60,10 @@ void Board::print_neighbours() {
 	}
 }
 
+int Board::get_size() const {
+	return size;
+}
+
 Board::Board(int size) {
 	this->size = size;
 
