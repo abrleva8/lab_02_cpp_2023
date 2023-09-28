@@ -8,7 +8,7 @@ ConsoleInput::ConsoleInput() {
 
 bool ConsoleInput::read(Board& board) {
 	std::cout << "Enter the size of the board: ";
-	int size = get_number(1, 10);
+	const int size = get_number(1, 10);
 
 	std::cout << "1 is Life, 0 is Not Life" << std::endl;
 	board = Board(size);

@@ -15,6 +15,8 @@ void greetings();
 // Печает пунты меню
 void print_menu();
 
+void print_menu_mode();
+
 // На данный момент реализована логика меню программы
 void interface_menu();
 

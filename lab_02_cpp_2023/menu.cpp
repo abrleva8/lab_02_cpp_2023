@@ -27,6 +27,12 @@ void print_menu() {
 	std::cout << "Enter 0 to exit." << std::endl;
 }
 
+void print_menu_mode() {
+	std::cout << std::endl << std::endl;
+	std::cout << "Enter 1 to print the result step by step." << std::endl;
+	std::cout << "Enter 2 to print the result every second." << std::endl;
+}
+
 void interface_menu() {
 	bool is_restart = true;
 	ConsoleInput ci;
@@ -79,13 +85,24 @@ void interface_menu() {
 		
 		// std::unique_ptr<Simulator> simulator(new Simulator(board));
 		const auto simulator = std::make_unique<Simulator>(*board);
-		simulator->print_board();
-		simulator->print_neighbours();
-		for (int i = 0; i < 5; i++) {
-			simulator->next_generation();
-			simulator->print_board();
-			simulator->print_neighbours();
+
+		print_menu_mode();
+		switch (const int choice = ci.get_number(ROW + 1, STEP + 1); choice) {
+			case ROW:{
+				simulator->set_mode(ROW);
+			}
+			break;
+
+			case STEP: {
+				simulator->set_mode(STEP);
+			}
+			default:
+				break;
 		}
+
+		// simulator->print_board();
+		// simulator->print_neighbours();
+		simulator->simulate();
 
 	} while (is_restart);
 }
