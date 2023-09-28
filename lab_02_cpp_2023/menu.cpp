@@ -6,7 +6,7 @@
 #include "file_input.h"
 #include "random_input.h"
 #include "life.h"
-// #include "file_output.h"
+#include "file_output.h"
 // #include "test.h"
 
 void greetings() {
@@ -14,8 +14,6 @@ void greetings() {
 		"The author is Levon Abramyan, Group 404, Course 4th" << std::endl << std::endl;
 
 	std::cout << "The problem is: simulate the Game of Life." << std::endl << std::endl;
-
-	std::cout << "" << std::endl << std::endl;
 }
 
 void print_menu() {
@@ -40,7 +38,7 @@ void interface_menu() {
 
 
 	do {
-		// const FileOutput fo;
+		const FileOutput fo;
 		print_menu();
 		switch (const int choice = ci.get_number(static_cast<int> (EXIT), static_cast<int> (TEST)); choice) {
 		case EXIT:
@@ -79,11 +77,10 @@ void interface_menu() {
 			continue;
 		}
 
-		/*if (!is_file_input) {
-			fo.save_input_data(*text);
-		}*/
+		if (!is_file_input) {
+			fo.save_input_data(*board);
+		}
 		
-		// std::unique_ptr<Simulator> simulator(new Simulator(board));
 		const auto simulator = std::make_unique<Simulator>(*board);
 
 		print_menu_mode();

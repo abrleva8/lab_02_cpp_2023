@@ -30,10 +30,11 @@ void Simulator::simulate() {
 			next_generation();
 			print_board();
 			print_neighbours();
-			std::cout << "Continue? Please enter yes/no" << std::endl;
+			std::cout << "Continue? Please enter y/n" << std::endl;
 			is_continue = ConsoleInput::is_choice_yes();
 		}
 	}
+	
 	std::cout << "The end!";
 }
 

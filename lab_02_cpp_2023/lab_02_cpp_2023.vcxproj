@@ -131,6 +131,7 @@
     <ClCompile Include="board.cpp" />
     <ClCompile Include="console_input.cpp" />
     <ClCompile Include="file_input.cpp" />
+    <ClCompile Include="file_output.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="life.cpp" />
     <ClCompile Include="main.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="console_input.h" />
     <ClInclude Include="file_input.h" />
+    <ClInclude Include="file_output.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="life.h" />
     <ClInclude Include="menu.h" />

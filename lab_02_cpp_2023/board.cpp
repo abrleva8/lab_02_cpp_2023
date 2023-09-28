@@ -35,17 +35,17 @@ bool Board::is_correct_cell(int row_index, int col_index) {
 	return 0 <= row_index && row_index < size && 0 <= col_index && col_index < size;
 }
 
-void Board::print_board() {
+void Board::print_board(std::ostream* stream) {
 
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < size; ++j) {
 			if (cells[i][j] == LIFE) {
-				std::cout << "*";
+				*stream << "*";
 			} else {
-				std::cout << " ";
+				*stream << " ";
 			}
 		}
-		std::cout << std::endl;
+		*stream << std::endl;
 	}
 }
 

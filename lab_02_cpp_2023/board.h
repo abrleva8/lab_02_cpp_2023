@@ -24,7 +24,7 @@ public:
 	Board();
 	std::vector<std::vector<CELLTYPE>> cells;
 	int count_cell_neighbour(int row_index, int col_index);
-	void print_board();
+	void print_board(std::ostream* stream = &std::cout);
 	void print_neighbours();
 	void update_cells_neighbour();
 	std::vector<std::vector<int>> cell_neighbour;
