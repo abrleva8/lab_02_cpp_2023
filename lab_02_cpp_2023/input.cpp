@@ -5,8 +5,8 @@ bool Input::get_is_file_input() const {
 }
 
 bool Input::check_string(std::string str) {
-	for (int i = 0; i < str.size(); i++) {
-		if (str[i] != '*' || str[i] != '-') {
+	for (const char ch : str) {
+		if (ch != '*' || ch != '_') {
 			return false;
 		}
 	}

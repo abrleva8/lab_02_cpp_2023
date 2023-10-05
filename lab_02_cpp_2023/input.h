@@ -15,7 +15,7 @@ public:
 
 	[[nodiscard]] bool get_is_file_input() const;
 
-	bool check_string(std::string str);
+	static bool check_string(std::string str);
 
 	// Виртуальный деструктор
 	virtual ~Input() = default;

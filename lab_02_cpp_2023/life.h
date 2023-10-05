@@ -5,10 +5,9 @@
 #include <thread>
 
 #include "board.h"
-#include "console_input.h"
 
 enum Mode {
-	ROW,
+	ROW = 1,
 	STEP,
 };
 

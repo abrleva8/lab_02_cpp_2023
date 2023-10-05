@@ -27,8 +27,8 @@ void print_menu() {
 
 void print_menu_mode() {
 	std::cout << std::endl << std::endl;
-	std::cout << "Enter 1 to print the result step by step." << std::endl;
-	std::cout << "Enter 2 to print the result every second." << std::endl;
+	std::cout << "Enter 1 to print the result every second." << std::endl;
+	std::cout << "Enter 2 to print the result step by step." << std::endl;
 }
 
 void interface_menu() {
@@ -38,7 +38,6 @@ void interface_menu() {
 
 
 	do {
-		const FileOutput fo;
 		print_menu();
 		switch (const int choice = ci.get_number(static_cast<int> (EXIT), static_cast<int> (TEST)); choice) {
 		case EXIT:
@@ -50,8 +49,7 @@ void interface_menu() {
 		}
 			break;
 		case FILES: {
-			std::cout << "No test yet! Sorry! :(";
-			// input = std::make_unique<FileInput>();
+			input = std::make_unique<FileInput>();
 		}
 			break;
 		case RANDOM: {
@@ -78,13 +76,14 @@ void interface_menu() {
 		}
 
 		if (!is_file_input) {
+			constexpr FileOutput fo;
 			fo.save_input_data(*board);
 		}
 		
 		const auto simulator = std::make_unique<Simulator>(*board);
 
 		print_menu_mode();
-		switch (const int choice = ci.get_number(ROW + 1, STEP + 1); choice) {
+		switch (const int choice = ci.get_number(ROW + 0, STEP + 0); choice) {
 			case ROW:{
 				simulator->set_mode(ROW);
 			}

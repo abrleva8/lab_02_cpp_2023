@@ -12,7 +12,8 @@ enum CELLTYPE {
 class Board {
 private:
 	int size;
-	
+
+private:
 	int dx[8] = {1, 0, -1, -1, -1, 0, 1, 1};
 	int dy[8] = {-1, -1, -1, 0, 1, 1, 1, 0};
 
@@ -21,14 +22,20 @@ protected:
 
 public:
 	Board(int size);
+	Board(const std::vector<std::string>& cells);
 	Board();
 	std::vector<std::vector<CELLTYPE>> cells;
 	int count_cell_neighbour(int row_index, int col_index);
-	void print_board(std::ostream* stream = &std::cout);
+	void print_board(std::ostream* stream = &std::cout) const;
 	void print_neighbours();
 	void update_cells_neighbour();
 	std::vector<std::vector<int>> cell_neighbour;
 	int get_size() const;
+
+	void set_size(int size) {
+		this->size = size;
+	}
+	bool is_good_data() const;
 };
 
 

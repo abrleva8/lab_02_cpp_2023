@@ -11,12 +11,12 @@ class FileInput final : public Input {
 private:
 
 	// Процесс чтения из файла, на корректном файле
-	// bool read_data_from_file(std::ifstream& file, Text& text) const;
+	static bool read_data_from_file(std::ifstream& file, Board& board);
 
 public:
 	FileInput();
 	// Реализация метода класса @Input
-	// bool read(Text& text) override;
+	bool read(Board& board) override;
 
 };
 

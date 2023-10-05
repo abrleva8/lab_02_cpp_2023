@@ -1,4 +1,7 @@
+#include <windows.h>
+
 #include "life.h"
+#include "console_input.h"
 
 
 void Simulator::next_generation() {
@@ -18,18 +21,24 @@ void Simulator::next_generation() {
 
 void Simulator::simulate() {
 	if (mode == ROW) {
+		std::cout << "Press key 'space' to espace the loop!" << std::endl;
 		for (int i = 0; i < MAX_STEPS; i++) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
-			next_generation();
-			print_board();
-			print_neighbours();
+			if (GetKeyState(VK_SPACE)) {
+				std::cout << "Stopped!" << std::endl;
+				break;
+			} else {
+				print_board();
+				print_neighbours();
+				next_generation();
+			}
 		}
 	} else {
 		bool is_continue{ true };
 		while (is_continue) {
-			next_generation();
 			print_board();
 			print_neighbours();
+			next_generation();
 			std::cout << "Continue? Please enter y/n" << std::endl;
 			is_continue = ConsoleInput::is_choice_yes();
 		}

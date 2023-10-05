@@ -2,6 +2,7 @@
 #define _CONSOLE_INPUT_H_
 
 #include <iostream>
+#include <string>
 
 #include "input.h"
 
