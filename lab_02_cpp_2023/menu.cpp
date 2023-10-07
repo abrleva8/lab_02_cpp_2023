@@ -53,7 +53,7 @@ void interface_menu() {
 		}
 			break;
 		case RANDOM: {
-			std::cout << "No test yet! Sorry! :(";
+			std::cout << "No test yet! Sorry! :( ";
 			// input = std::make_unique<RandomInput>();
 		}
 			break;
