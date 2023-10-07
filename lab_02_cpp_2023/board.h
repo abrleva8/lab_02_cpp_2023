@@ -23,7 +23,7 @@ public:
 	explicit Board(const std::vector<std::string>& cells);
 	Board();
 	std::vector<std::vector<CELLTYPE>> cells;
-	int count_cell_neighbour(int row_index, int col_index);
+	int count_cell_neighbour(int row_index, int col_index) const;
 	void print_board(std::ostream* stream = &std::cout) const;
 	void print_neighbours();
 	void update_cells_neighbour();
