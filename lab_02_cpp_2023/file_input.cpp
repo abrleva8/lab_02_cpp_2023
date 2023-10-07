@@ -21,7 +21,7 @@ bool FileInput::read_data_from_file(std::ifstream& file, Board& board) {
 		cells.emplace_back(str);
 	}
 
-	const int size = cells.size();
+	const size_t size = cells.size();
 	for (const auto& cell: cells) {
 		if (cell.length() != size) {
 			std::cerr << "The size of data is bad!";

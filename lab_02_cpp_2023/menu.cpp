@@ -74,9 +74,8 @@ void interface_menu() {
 		} else {
 			continue;
 		}
-
+		constexpr FileOutput fo;
 		if (!is_file_input) {
-			constexpr FileOutput fo;
 			fo.save_input_data(*board);
 		}
 		
@@ -87,11 +86,13 @@ void interface_menu() {
 			case ROW:{
 				simulator->set_mode(ROW);
 			}
-			break;
+				break;
 
 			case STEP: {
 				simulator->set_mode(STEP);
 			}
+				break;
+			
 			default:
 				break;
 		}
@@ -99,6 +100,7 @@ void interface_menu() {
 		// simulator->print_board();
 		// simulator->print_neighbours();
 		simulator->simulate();
+		fo.save_output_data(*simulator);
 
 	} while (is_restart);
 }

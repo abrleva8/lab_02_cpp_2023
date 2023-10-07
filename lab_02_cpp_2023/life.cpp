@@ -5,22 +5,25 @@
 
 
 void Simulator::next_generation() {
-	const int size = board.get_size();
+	const size_t size = _board.get_size();
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
-			if (const auto neighbors = board.cell_neighbour[i][j]; neighbors < 2 || neighbors > 3) {
-				board.cells[i][j] = EMPTY;
+			if (const auto neighbors = _board.cell_neighbour[i][j]; neighbors < 2 || neighbors > 3) {
+				_board.cells[i][j] = EMPTY;
 			} else if (neighbors == 3) {
-				board.cells[i][j] = LIFE;
+				_board.cells[i][j] = LIFE;
 			}
 		}
 	}
 
-	board.update_cells_neighbour();
+	_board.update_cells_neighbour();
 }
 
 void Simulator::simulate() {
-	if (mode == ROW) {
+	_history.clear();
+	_history.emplace_back(_board);
+
+	if (_mode == ROW) {
 		std::cout << "Press key 'space' to espace the loop!" << std::endl;
 		for (int i = 0; i < MAX_STEPS; i++) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -30,6 +33,7 @@ void Simulator::simulate() {
 			} else {
 				print_board();
 				print_neighbours();
+				_history.emplace_back(_board);
 				next_generation();
 			}
 		}
@@ -38,6 +42,7 @@ void Simulator::simulate() {
 		while (is_continue) {
 			print_board();
 			print_neighbours();
+			_history.emplace_back(_board);
 			next_generation();
 			std::cout << "Continue? Please enter y/n" << std::endl;
 			is_continue = ConsoleInput::is_choice_yes();
@@ -50,14 +55,21 @@ void Simulator::simulate() {
 	
 
 Simulator::Simulator(Board board, Mode mode) {
-	this->board = board;
-	this->mode = mode;
+	this->_board = board;
+	this->_mode = mode;
 }
 
-void Simulator::print_board() {
-	board.print_board();
+void Simulator::print_board(std::ostream* stream) {
+	_board.print_board(stream);
 }
 
 void Simulator::print_neighbours() {
-	board.print_neighbours();
+	_board.print_neighbours();
+}
+
+void Simulator::print_history(std::ostream* stream) {
+	for (auto &board : _history) {
+		board.print_board(stream);
+		*stream << std::endl << std::endl;
+	}
 }

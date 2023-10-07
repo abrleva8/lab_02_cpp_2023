@@ -2,7 +2,9 @@
 #define _FILE_OUTPUT_H_
 
 #include <string>
+
 #include "board.h"
+#include "life.h"
 
 class FileOutput {
 private:
@@ -21,10 +23,20 @@ private:
 	// Если что-то не получилось возвращает @false
 	[[nodiscard]] bool save_input_data_to_file(Board board) const;
 
+	// Метод, который сохраняет выходные данные в файл
+	// Если что-то не получилось возвращает @false
+	[[nodiscard]] bool save_output_data_to_file(Simulator board) const;
+
+	// Записывает в данный файл выходные данные
+	static void write_output_data_to_file(std::ofstream& fout, Simulator board);
+
 
 public:
 	// Метод запускающий процедуру сохранения входных данных в файл
 	void save_input_data(const Board &board) const;
+
+	// Метод запускающий процедуру сохранения выходных данных в файл
+	bool save_output_data(const Simulator& board) const;
 };
 
 #endif

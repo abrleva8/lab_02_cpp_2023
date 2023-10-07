@@ -11,7 +11,7 @@ enum CELLTYPE {
 
 class Board {
 private:
-	int size;
+	size_t _size;
 
 private:
 	int dx[8] = {1, 0, -1, -1, -1, 0, 1, 1};
@@ -30,10 +30,12 @@ public:
 	void print_neighbours();
 	void update_cells_neighbour();
 	std::vector<std::vector<int>> cell_neighbour;
-	int get_size() const;
+	size_t get_size() {
+		return _size;
+	}
 
-	void set_size(int size) {
-		this->size = size;
+	void set_size(size_t size) {
+		this->_size = size;
 	}
 	bool is_good_data() const;
 };
