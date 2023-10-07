@@ -13,7 +13,7 @@ bool FileInput::read_data_from_file(std::ifstream& file, Board& board) {
 	while (!file.eof()) {
 		std::string str;
 		std::getline(file, str);
-		if (!board.is_good_data()) {
+		if (!check_string(str)) {
 			std::cerr << "The file has unreadable symbols!";
 			return false;
 		}

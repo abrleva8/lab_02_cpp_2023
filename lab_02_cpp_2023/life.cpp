@@ -1,5 +1,7 @@
 #include <windows.h>
 
+#include <utility>
+
 #include "life.h"
 #include "console_input.h"
 
@@ -30,12 +32,12 @@ void Simulator::simulate() {
 			if (GetKeyState(VK_SPACE)) {
 				std::cout << "Stopped!" << std::endl;
 				break;
-			} else {
-				print_board();
-				print_neighbours();
-				_history.emplace_back(_board);
-				next_generation();
 			}
+
+			print_board();
+			print_neighbours();
+			_history.emplace_back(_board);
+			next_generation();
 		}
 	} else {
 		bool is_continue{ true };
@@ -54,12 +56,12 @@ void Simulator::simulate() {
 
 	
 
-Simulator::Simulator(Board board, Mode mode) {
-	this->_board = board;
+Simulator::Simulator(Board board, const Mode mode) {
+	this->_board = std::move(board);
 	this->_mode = mode;
 }
 
-void Simulator::print_board(std::ostream* stream) {
+void Simulator::print_board(std::ostream* stream) const {
 	_board.print_board(stream);
 }
 
@@ -67,7 +69,7 @@ void Simulator::print_neighbours() {
 	_board.print_neighbours();
 }
 
-void Simulator::print_history(std::ostream* stream) {
+void Simulator::print_history(std::ostream* stream) const {
 	for (auto &board : _history) {
 		board.print_board(stream);
 		*stream << std::endl << std::endl;

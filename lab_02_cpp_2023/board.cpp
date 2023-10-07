@@ -14,13 +14,13 @@ void Board::update_cells_neighbour() {
 	}
 }
 
-int Board::count_cell_neighbour(int row_index, int col_index) {
+int Board::count_cell_neighbour(const int row_index, const int col_index) {
 
 	int result = 0;
 
 	for (int i = 0; i < 8; i++) {
-		int new_dx = row_index + dx[i];
-		int new_dy = col_index + dy[i];
+		const int new_dx = row_index + dx[i];
+		const int new_dy = col_index + dy[i];
 
 		if (is_correct_cell(new_dx, new_dy)) {
 			if (cells[new_dx][new_dy] == LIFE) {
@@ -32,7 +32,7 @@ int Board::count_cell_neighbour(int row_index, int col_index) {
 	return result;
 }
 
-bool Board::is_correct_cell(int row_index, int col_index) {
+bool Board::is_correct_cell(const int row_index, const int col_index) const {
 	return 0 <= row_index && row_index < _size && 0 <= col_index && col_index < _size;
 }
 
@@ -64,19 +64,7 @@ void Board::print_neighbours() {
 	}
 }
 
-bool Board::is_good_data() const {
-	for (auto& row : cells) {
-		for (const auto celltype : row) {
-			if (celltype != '*' || celltype != '_') {
-				return false;
-			}
-		}
-	}
-
-	return true;
-}
-
-Board::Board(int size) {
+Board::Board(const int size) {
 	this->_size = size;
 
 	cells = std::vector<std::vector<CELLTYPE> >(size, std::vector<CELLTYPE>(size));
@@ -92,8 +80,8 @@ Board::Board(int size) {
 
 Board::Board(const std::vector<std::string>& cells) {
 	this->cells.clear();
-	size_t size = cells.size();
-	cell_neighbour = std::vector<std::vector<int> >(size, std::vector<int>(size));
+	const size_t size = cells.size();
+	cell_neighbour = std::vector(size, std::vector<int>(size));
 
 	for (int i = 0; i < cells.size(); ++i) {
 		this->cells.emplace_back();

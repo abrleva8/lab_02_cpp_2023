@@ -4,9 +4,9 @@
 #include "board.h"
 #include "console_input.h"
 #include "file_input.h"
-#include "random_input.h"
-#include "life.h"
 #include "file_output.h"
+#include "life.h"
+#include "random_input.h"
 // #include "test.h"
 
 void greetings() {
@@ -100,7 +100,7 @@ void interface_menu() {
 		// simulator->print_board();
 		// simulator->print_neighbours();
 		simulator->simulate();
-		fo.save_output_data(*simulator);
+		FileOutput::save_output_data(*simulator);
 
 	} while (is_restart);
 }

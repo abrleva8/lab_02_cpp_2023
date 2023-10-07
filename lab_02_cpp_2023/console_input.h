@@ -7,8 +7,6 @@
 #include "input.h"
 
 class ConsoleInput final : public Input {
-private:
-protected:
 public:
 	ConsoleInput();
 	// Реализация метода из класса @Input
@@ -48,7 +46,7 @@ Type ConsoleInput::get_number() {
 }
 
 template<typename Type>
-Type ConsoleInput::get_number(Type min, Type max, std::string message) {
+Type ConsoleInput::get_number(Type min, Type max, const std::string message) {
 	Type result = get_number<Type>();
 	while (result > max || result < min) {
 		std::cout << "Your number should be between " << min << " and " << max << std::endl;

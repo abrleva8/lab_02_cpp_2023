@@ -2,7 +2,6 @@
 #define _LIFE_H_
 
 #include <chrono>
-#include <thread>
 
 #include "board.h"
 
@@ -18,18 +17,17 @@ private:
 	Mode _mode;
 
 public:
-	void set_mode(Mode mode) {
+	void set_mode(const Mode mode) {
 		this->_mode = mode;
 	}
 
 private:
 	const int MAX_STEPS = 100;
-protected:
 public:
-	Simulator(Board board, Mode mode = STEP);
-	void print_board(std::ostream* stream = &std::cout);
+	explicit Simulator(Board board, Mode mode = STEP);
+	void print_board(std::ostream* stream = &std::cout) const;
 	void print_neighbours();
-	void print_history(std::ostream* stream = &std::cout);
+	void print_history(std::ostream* stream = &std::cout) const;
 	void next_generation();
 	void simulate();
 };

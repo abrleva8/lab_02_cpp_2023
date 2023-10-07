@@ -1,8 +1,6 @@
 #ifndef _FILE_INPUT_H_
 #define _FILE_INPUT_H_
 
-#include <iostream>
-
 #include "input.h"
 // #include "text_analyzer.h"
 

@@ -1,12 +1,12 @@
-#include <iostream>
-#include <fstream>
 #include <filesystem>
+#include <fstream>
+#include <iostream>
 #include <utility>
 
 #include "file_output.h"
 #include "console_input.h"
 
-void FileOutput::try_overwrite_file(std::string& filename) const {
+void FileOutput::try_overwrite_file(std::string& filename) {
 	bool is_to_overwrite = false;
 
 	while (is_file_exist(filename) && !is_to_overwrite) {
@@ -14,8 +14,8 @@ void FileOutput::try_overwrite_file(std::string& filename) const {
 			return;
 		}
 		std::cout << "The file with same name exists. Are you sure to want overwrite the file? Input please y/n." << std::endl;
-		ConsoleInput ci;
-		is_to_overwrite = ci.is_choice_yes();
+		
+		is_to_overwrite = ConsoleInput::is_choice_yes();
 		if (!is_to_overwrite) {
 			std::cout << "Please input the filename:" << std::endl;
 			std::getline(std::cin, filename);
@@ -28,11 +28,11 @@ bool FileOutput::is_file_exist(const std::string& filename) {
 	return infile.good();
 }
 
-void FileOutput::write_input_data_to_file(std::ofstream& fout, Board board) {
+void FileOutput::write_input_data_to_file(std::ofstream& fout, const Board& board) {
 	board.print_board(&fout);
 }
 
-bool FileOutput::save_input_data_to_file(Board board) const {
+bool FileOutput::save_input_data_to_file(const Board& board) {
 	std::cout << "Please, input the filename:" << std::endl;
 	std::string filename;
 	getline(std::cin, filename);
@@ -43,7 +43,7 @@ bool FileOutput::save_input_data_to_file(Board board) const {
 			std::cerr << "Sorry, there is a problem with file." << std::endl;
 			return false;
 		}
-		write_input_data_to_file(fout, std::move(board));
+		write_input_data_to_file(fout, board);
 	} else {
 		fout.close();
 		return false;
@@ -52,7 +52,7 @@ bool FileOutput::save_input_data_to_file(Board board) const {
 	return true;
 }
 
-bool FileOutput::save_output_data_to_file(Simulator board) const {
+bool FileOutput::save_output_data_to_file(Simulator simulator) {
 	std::cout << "Please input the filename:" << std::endl;
 	std::string filename;
 	std::getline(std::cin, filename);
@@ -60,12 +60,11 @@ bool FileOutput::save_output_data_to_file(Simulator board) const {
 	std::ofstream fout(filename);
 
 	if (fout.is_open()) {
-		std::error_code ec;
-		if (!std::filesystem::is_regular_file(filename, ec)) {
+		if (std::error_code ec; !std::filesystem::is_regular_file(filename, ec)) {
 			std::cout << "Sorry, there is a problem with file." << std::endl;
 			return false;
 		}
-		write_output_data_to_file(fout, std::move(board));
+		write_output_data_to_file(fout, std::move(simulator));
 	} else {
 		fout.close();
 		return false;
@@ -78,10 +77,10 @@ void FileOutput::write_output_data_to_file(std::ofstream& fout, Simulator simula
 	simulator.print_history(&fout);
 }
 
-void FileOutput::save_input_data(const Board& board) const {
+void FileOutput::save_input_data(const Board& board) {
 	std::cout << "Do you want to save input data to file? Input please y/n." << std::endl;
 
-	if (const ConsoleInput ci; ci.is_choice_yes()) {
+	if (ConsoleInput::is_choice_yes()) {
 		bool is_success = save_input_data_to_file(board);
 
 		while (!is_success) {
@@ -93,10 +92,10 @@ void FileOutput::save_input_data(const Board& board) const {
 	}
 }
 
-bool FileOutput::save_output_data(const Simulator& simulator) const {
+bool FileOutput::save_output_data(const Simulator& simulator) {
 	std::cout << "Do you want to save result to file? Input please y/n:" << std::endl;
 
-	if (const ConsoleInput ci; ci.is_choice_yes()) {
+	if (ConsoleInput::is_choice_yes()) {
 		bool is_success = save_output_data_to_file(simulator);
 
 		while (!is_success) {
