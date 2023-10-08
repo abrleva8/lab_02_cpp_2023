@@ -53,8 +53,7 @@ void interface_menu() {
 		}
 			break;
 		case RANDOM: {
-			std::cout << "No test yet! Sorry! :( ";
-			// input = std::make_unique<RandomInput>();
+			input = std::make_unique<RandomInput>();
 		}
 			break;
 		case TEST: {
@@ -67,6 +66,7 @@ void interface_menu() {
 
 		std::unique_ptr<Board> board(new Board);
 		const bool is_success = input->read(*board);
+		board->print_board();
 		const bool is_file_input = input->get_is_file_input();
 
 		if (is_success) {
@@ -74,9 +74,8 @@ void interface_menu() {
 		} else {
 			continue;
 		}
-		constexpr FileOutput fo;
 		if (!is_file_input) {
-			fo.save_input_data(*board);
+			FileOutput::save_input_data(*board);
 		}
 		
 		const auto simulator = std::make_unique<Simulator>(*board);

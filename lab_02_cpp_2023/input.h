@@ -7,6 +7,7 @@
 class Input {
 protected:
 	bool is_file_input_ = false;
+	const int MAX_SIZE = 20;
 public:
 	// Контракт метода:
 	// 1 - Записать в поле @text - текст

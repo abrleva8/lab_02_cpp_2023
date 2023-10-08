@@ -1,8 +1,6 @@
 #include "board.h"
 
-#include <algorithm>
 #include <memory>
-#include <utility>
 
 
 void Board::update_cells_neighbour() {
@@ -14,7 +12,7 @@ void Board::update_cells_neighbour() {
 	}
 }
 
-int Board::count_cell_neighbour(const int row_index, const int col_index) {
+int Board::count_cell_neighbour(const int row_index, const int col_index) const {
 
 	int result = 0;
 
@@ -67,8 +65,8 @@ void Board::print_neighbours() {
 Board::Board(const int size) {
 	this->_size = size;
 
-	cells = std::vector<std::vector<CELLTYPE> >(size, std::vector<CELLTYPE>(size));
-	cell_neighbour = std::vector<std::vector<int> >(size, std::vector<int>(size));
+	cells = std::vector(size, std::vector<CELLTYPE>(size));
+	cell_neighbour = std::vector(size, std::vector<int>(size));
 
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < size; ++j) {
@@ -88,7 +86,6 @@ Board::Board(const std::vector<std::string>& cells) {
 		for (int j = 0; j < cells[i].length(); ++j) {
 			auto cell_type = cells[i][j] == '*' ? LIFE : EMPTY;
 			this->cells[i].emplace_back(cell_type);
-
 			cell_neighbour[i][j] = 0;
 		}
 	}

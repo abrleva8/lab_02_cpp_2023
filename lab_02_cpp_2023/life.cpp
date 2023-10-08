@@ -26,10 +26,10 @@ void Simulator::simulate() {
 	_history.emplace_back(_board);
 
 	if (_mode == ROW) {
-		std::cout << "Press key 'space' to espace the loop!" << std::endl;
+		std::cout << "Keep the key 'Esp' pressed to espace the loop!" << std::endl;
 		for (int i = 0; i < MAX_STEPS; i++) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
-			if (GetKeyState(VK_SPACE)) {
+			if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
 				std::cout << "Stopped!" << std::endl;
 				break;
 			}

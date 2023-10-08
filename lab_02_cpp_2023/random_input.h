@@ -14,7 +14,7 @@ private:
 public:
 	RandomInput();
 	// Реализация метода класса @Input
-	// bool read(Text& text) override;
+	bool read(Board& board) override;
 
 };
 
