@@ -7,7 +7,7 @@
 #include "file_output.h"
 #include "life.h"
 #include "random_input.h"
-// #include "test.h"
+#include "test.h"
 
 void greetings() {
 	std::cout << "This is the second laboratory task of the first variation. "
