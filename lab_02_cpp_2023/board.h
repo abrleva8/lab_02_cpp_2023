@@ -19,6 +19,9 @@ private:
 	[[nodiscard]] bool is_correct_cell(int row_index, int col_index) const;
 
 public:
+
+	bool operator==(const Board& another_board);
+	bool operator!=(const Board& another_board);
 	explicit Board(int size);
 	explicit Board(const std::vector<std::string>& cells);
 	Board();

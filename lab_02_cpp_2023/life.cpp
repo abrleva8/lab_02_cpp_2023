@@ -56,6 +56,8 @@ void Simulator::simulate() {
 
 	
 
+Simulator::Simulator(Mode mode) {}
+
 Simulator::Simulator(Board board, const Mode mode) {
 	this->_board = std::move(board);
 	this->_mode = mode;

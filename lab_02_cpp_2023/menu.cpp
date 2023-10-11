@@ -57,7 +57,15 @@ void interface_menu() {
 		}
 			break;
 		case TEST: {
-			std::cout << "No test yet! Sorry! :(";
+			const auto test = std::make_unique<Test>();
+
+			test->start();
+
+			if (!test->get_is_success()) {
+				std::cout << "Sorry, but there is a problem test. The program will be closed." << std::endl;
+				return;
+			}
+			continue;
 		}
 			break;
 		default:

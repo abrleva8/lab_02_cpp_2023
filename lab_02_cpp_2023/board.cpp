@@ -35,6 +35,9 @@ bool Board::is_correct_cell(const int row_index, const int col_index) const {
 }
 
 void Board::print_board(std::ostream* stream) const {
+	if (stream->rdbuf() == std::cout.rdbuf()) {
+		*stream << "The board: " << std::endl;
+	}
 
 	for (int i = 0; i < _size; ++i) {
 		for (int j = 0; j < _size; ++j) {
@@ -62,6 +65,16 @@ void Board::print_neighbours() {
 	}
 }
 
+bool Board::operator==(const Board& another_board) {
+	return this->cells == another_board.cells;
+}
+
+bool Board::operator!=(const Board& another_board) {
+	return this->cells != another_board.cells;
+}
+
+
+
 Board::Board(const int size) {
 	this->_size = size;
 
@@ -78,8 +91,8 @@ Board::Board(const int size) {
 
 Board::Board(const std::vector<std::string>& cells) {
 	this->cells.clear();
-	const size_t size = cells.size();
-	cell_neighbour = std::vector(size, std::vector<int>(size));
+	_size = cells.size();
+	cell_neighbour = std::vector(_size, std::vector<int>(_size));
 
 	for (int i = 0; i < cells.size(); ++i) {
 		this->cells.emplace_back();
@@ -89,6 +102,8 @@ Board::Board(const std::vector<std::string>& cells) {
 			cell_neighbour[i][j] = 0;
 		}
 	}
+
+	update_cells_neighbour();
 }
 
 Board::Board() = default;
