@@ -1,13 +1,12 @@
 #include "test.h"
 #include "life.h"
 
-int Test::check_in() {
-	auto simulator = std::make_unique<Simulator>();
+int Test::check_in() const {
+	const auto simulator = std::make_unique<Simulator>();
 	for (int i = 0; i < NUMBER_OF_TESTS; i++) {
 		simulator->set_board(data_[i]);
 		simulator->next_generation();
-		auto predict = simulator->get_board();
-		if (predict != answers_[i]) {
+		if (auto predict = simulator->get_board(); predict != answers_[i]) {
 			std::cout << "Right answer:" << std::endl;
 			answers_[i].print_board();
 			std::cout << std::endl;

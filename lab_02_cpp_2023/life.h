@@ -15,29 +15,28 @@ private:
 	Board _board;
 	std::vector<Board> _history;
 	Mode _mode;
+	const int MAX_STEPS{100};
 
 public:
+	void set_board(const Board& board) {
+		_board = board;
+	}
+
+	[[nodiscard]] Board get_board() const {
+		return _board;
+	}
+
 	void set_mode(const Mode mode) {
 		this->_mode = mode;
 	}
 
-	void set_board(const Board _board) {
-		this->_board = _board;
-	}
-
-	Board get_board() {
-		return this->_board;
-	}
-
-private:
-	const int MAX_STEPS = 100;
-public:
-	Simulator(Mode mode = STEP);
+	explicit Simulator(Mode mode = STEP);
 	explicit Simulator(Board board, Mode mode = STEP);
 	void print_board(std::ostream* stream = &std::cout) const;
 	void print_neighbours();
 	void print_history(std::ostream* stream = &std::cout) const;
 	void next_generation();
+	void do_work();
 	void simulate();
 };
 

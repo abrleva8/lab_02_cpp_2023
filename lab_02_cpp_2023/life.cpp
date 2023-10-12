@@ -21,6 +21,13 @@ void Simulator::next_generation() {
 	_board.update_cells_neighbour();
 }
 
+void Simulator::do_work() {
+	print_board();
+	print_neighbours();
+	_history.emplace_back(_board);
+	next_generation();
+}
+
 void Simulator::simulate() {
 	_history.clear();
 	_history.emplace_back(_board);
@@ -34,18 +41,12 @@ void Simulator::simulate() {
 				break;
 			}
 
-			print_board();
-			print_neighbours();
-			_history.emplace_back(_board);
-			next_generation();
+			do_work();
 		}
 	} else {
 		bool is_continue{ true };
 		while (is_continue) {
-			print_board();
-			print_neighbours();
-			_history.emplace_back(_board);
-			next_generation();
+			do_work();
 			std::cout << "Continue? Please enter y/n" << std::endl;
 			is_continue = ConsoleInput::is_choice_yes();
 		}
@@ -54,9 +55,10 @@ void Simulator::simulate() {
 	std::cout << "The end!";
 }
 
-	
 
-Simulator::Simulator(Mode mode) {}
+Simulator::Simulator(const Mode mode) {
+	_mode = mode;
+}
 
 Simulator::Simulator(Board board, const Mode mode) {
 	this->_board = std::move(board);

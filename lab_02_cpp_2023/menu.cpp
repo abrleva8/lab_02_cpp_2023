@@ -89,7 +89,7 @@ void interface_menu() {
 		const auto simulator = std::make_unique<Simulator>(*board);
 
 		print_menu_mode();
-		switch (const int choice = ci.get_number(ROW + 0, STEP + 0); choice) {
+		switch (const int choice = ci.get_number(static_cast<int> (ROW), static_cast<int> (STEP)); choice) {
 			case ROW:{
 				simulator->set_mode(ROW);
 			}
@@ -104,8 +104,6 @@ void interface_menu() {
 				break;
 		}
 
-		// simulator->print_board();
-		// simulator->print_neighbours();
 		simulator->simulate();
 		FileOutput::save_output_data(*simulator);
 

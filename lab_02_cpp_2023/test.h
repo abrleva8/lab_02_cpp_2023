@@ -1,7 +1,7 @@
 #ifndef _TEST_H_
 #define _TEST_H_
 
-#define NUMBER_OF_TESTS 5
+constexpr auto NUMBER_OF_TESTS = 5;
 
 #include "board.h"
 
@@ -19,7 +19,7 @@ private:
 	//Метод запускает анализ текста для  @data_ и сверяет с @answers_
 	// Возвращает тест с номером ошибки
 	// Если ошибки  нет, то -1
-	int check_in();
+	[[nodiscard]] int check_in() const;
 
 public:
 	// Метод возвращает результат, который хранится в поле is_success_

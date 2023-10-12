@@ -65,11 +65,11 @@ void Board::print_neighbours() {
 	}
 }
 
-bool Board::operator==(const Board& another_board) {
+bool Board::operator==(const Board& another_board) const {
 	return this->cells == another_board.cells;
 }
 
-bool Board::operator!=(const Board& another_board) {
+bool Board::operator!=(const Board& another_board) const {
 	return this->cells != another_board.cells;
 }
 

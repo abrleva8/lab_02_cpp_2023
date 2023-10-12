@@ -5,8 +5,8 @@ RandomInput::RandomInput() {
 }
 
 bool RandomInput::read(Board& board) {
-	//const int size = rand() % MAX_SIZE + 1;
-	const int size = 5;
+	const int size = 3 + rand() % MAX_SIZE + 1;
+
 	std::cout << "The size of the board is: " << size << std::endl;
 
 	board = Board(size);
